@@ -11,5 +11,6 @@ namespace EmployeePayrollService
     {
         public static string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=payroll_service;";
         SqlConnection connection = new SqlConnection(connectionString);
+
     }
 }
