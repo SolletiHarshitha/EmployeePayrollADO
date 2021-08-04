@@ -9,6 +9,7 @@ namespace EmployeePayrollService
 {
     public class EmployeeRepository
     {
+        //Connecting to database
         public static string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=payroll_service";
         SqlConnection connection = new SqlConnection(connectionString);
 
@@ -19,10 +20,12 @@ namespace EmployeePayrollService
                 EmployeeDetails details = new EmployeeDetails();
                 using(this.connection)
                 {
+                    //Query to perfom
                     string query = @"Select * from employee_payroll";
                     SqlCommand command = new SqlCommand(query,this.connection);
-                    this.connection.Open();
+                    this.connection.Open(); //Opening the connection
                     SqlDataReader dataReader = command.ExecuteReader();
+                    //Checking if the table has data
                     if (dataReader.HasRows)
                     {
                         while (dataReader.Read())
@@ -47,7 +50,7 @@ namespace EmployeePayrollService
                     {
                         Console.WriteLine("No data found");
                     }
-                    this.connection.Close();
+                    this.connection.Close(); //closing the connection
                 }
             }
             catch(Exception ex)
