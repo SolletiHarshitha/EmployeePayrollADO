@@ -9,7 +9,7 @@ namespace EmployeePayrollService
 {
     public class EmployeeRepository
     {
-        public static string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=payroll_service;";
+        public static string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=payroll_service";
         SqlConnection connection = new SqlConnection(connectionString);
 
         public void GetAllEmployee()
@@ -19,13 +19,13 @@ namespace EmployeePayrollService
                 EmployeeDetails details = new EmployeeDetails();
                 using(this.connection)
                 {
-                    string query = "Select * from employee_payroll";
+                    string query = @"Select * from employee_payroll";
                     SqlCommand command = new SqlCommand(query,this.connection);
                     this.connection.Open();
                     SqlDataReader dataReader = command.ExecuteReader();
-                    if(dataReader.HasRows)
+                    if (dataReader.HasRows)
                     {
-                        while(dataReader.Read())
+                        while (dataReader.Read())
                         {
                             details.EmployeeID = Convert.ToInt32(dataReader["id"]);
                             details.EmployeeName = dataReader["name"].ToString();
@@ -39,12 +39,15 @@ namespace EmployeePayrollService
                             details.TaxablePay = Convert.ToDouble(dataReader["taxable_pay"]);
                             details.IncomeTax = Convert.ToDouble(dataReader["incometax"]);
                             details.NetPay = Convert.ToDouble(dataReader["net_pay"]);
-                            Console.WriteLine(details.EmployeeName+" "+details.BasicPay+" "+details.StartDate+" "+details.Gender+" "+details.PhoneNumber+" "+details.Address+" "+details.Department+" "+details.Deductions+" "+details.TaxablePay+" "+details.IncomeTax+" "+details.NetPay);
+                            Console.WriteLine(details.EmployeeName + " " + details.BasicPay + " " + details.StartDate + " " + details.Gender + " " + details.PhoneNumber + " " + details.Address + " " + details.Department + " " + details.Deductions + " " + details.TaxablePay + " " + details.IncomeTax + " " + details.NetPay);
                             Console.WriteLine("\n");
                         }
                     }
                     else
+                    {
                         Console.WriteLine("No data found");
+                    }
+                    this.connection.Close();
                 }
             }
             catch(Exception ex)
@@ -52,5 +55,7 @@ namespace EmployeePayrollService
                 Console.WriteLine(ex.Message);
             }
         }
+
+        
     }
 }
