@@ -10,7 +10,6 @@ namespace EmployeePayrollService
             EmployeeRepository repository = new EmployeeRepository();
             EmployeeDetails details = new EmployeeDetails();
             repository.UpdateSalary(details);
-            
         }
     }
 }

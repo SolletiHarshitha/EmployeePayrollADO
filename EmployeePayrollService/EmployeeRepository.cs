@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,11 @@ namespace EmployeePayrollService
             try
             {
                 EmployeeDetails details = new EmployeeDetails();
-                using(this.connection)
+                using (this.connection)
                 {
                     //Query to perfom
                     string query = @"Select * from employee_payroll";
-                    SqlCommand command = new SqlCommand(query,this.connection);
+                    SqlCommand command = new SqlCommand(query, this.connection);
                     this.connection.Open(); //Opening the connection
                     SqlDataReader dataReader = command.ExecuteReader();
                     //Checking if the table has data
@@ -50,10 +51,11 @@ namespace EmployeePayrollService
                     {
                         Console.WriteLine("No data found");
                     }
+                    dataReader.Close();
                     this.connection.Close(); //closing the connection
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -83,6 +85,43 @@ namespace EmployeePayrollService
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        public int UpdateSalaryusingPreparedStatement(EmployeeDetails details)
+        {
+            int result;
+            try
+            {
+                using(this.connection)
+                {
+                    SqlCommand command = new SqlCommand("dbo.UpdateEmployeeDetails", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("Id", details.EmployeeID);
+                    command.Parameters.AddWithValue("Name", details.EmployeeName);
+                    command.Parameters.AddWithValue("BasicPay", details.BasicPay);
+                    connection.Open();
+                    result = command.ExecuteNonQuery();
+                    if(result!=0)
+                    {
+                        Console.WriteLine("Successfully Updated using prepared statement");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not updated successfully");
+                        return default;
+                    }
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return default;
+            }
+            finally
+            {
+                this.connection.Close();
             }
         }
     }
