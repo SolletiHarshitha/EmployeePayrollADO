@@ -67,9 +67,10 @@ namespace EmployeePayrollService
             {
                 using(this.connection)
                 {
+                    //Query to perform
                     string query = @"update employee_payroll set basic_pay=3000000 where name='Terissa'";
                     SqlCommand cmd = new SqlCommand(query,this.connection);
-                    this.connection.Open();
+                    this.connection.Open(); //Opening the connection
                     int result = cmd.ExecuteNonQuery();
                     if(result!=0)
                     {
@@ -79,7 +80,7 @@ namespace EmployeePayrollService
                     {
                         Console.WriteLine("Unsuccessful");
                     }
-                    this.connection.Close();
+                    this.connection.Close(); //Closing the connection
                 }
             }
             catch(Exception ex)
@@ -95,12 +96,14 @@ namespace EmployeePayrollService
             {
                 using(this.connection)
                 {
+                    //Using stored procedure
                     SqlCommand command = new SqlCommand("dbo.UpdateEmployeeDetails", this.connection);
                     command.CommandType = CommandType.StoredProcedure;
+                    //Adding the parameters
                     command.Parameters.AddWithValue("Id", details.EmployeeID);
                     command.Parameters.AddWithValue("Name", details.EmployeeName);
                     command.Parameters.AddWithValue("BasicPay", details.BasicPay);
-                    connection.Open();
+                    connection.Open(); //Opening the connection
                     result = command.ExecuteNonQuery();
                     if(result!=0)
                     {
@@ -121,7 +124,7 @@ namespace EmployeePayrollService
             }
             finally
             {
-                this.connection.Close();
+                this.connection.Close(); //Closing the connection
             }
         }
     }

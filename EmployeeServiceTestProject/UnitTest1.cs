@@ -17,11 +17,15 @@ namespace EmployeeServiceTestProject
         [TestMethod]
         public void TestUpdateSalaryUsingPreparedStatement()
         {
+            ///AAA Methodology
+            //Arrange
             int expected = 1;
             details.EmployeeID = 6;
             details.EmployeeName = "Terissa";
             details.BasicPay = 3000000;
+            //Act
             int actual = repository.UpdateSalaryusingPreparedStatement(details);
+            //Assert
             Assert.AreEqual(expected, actual);
         }
     }
