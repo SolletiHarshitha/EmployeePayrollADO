@@ -214,5 +214,49 @@ namespace EmployeePayrollService
                 this.connection.Close(); //Closing the connection
             }
         }
+
+        
+
+        public bool AddEmployee(EmployeeDetails details)
+        {
+            try
+            {
+                using(this.connection)
+                {
+                    //Using stored procedure
+                    SqlCommand command = new SqlCommand("dbo.InsertIntoTable", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                   
+                    //Adding the parameters
+                    command.Parameters.AddWithValue("@Id", details.EmployeeID);
+                    command.Parameters.AddWithValue("@Name", details.EmployeeName);
+                    command.Parameters.AddWithValue("@BasicPay", details.BasicPay);
+                    command.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                    command.Parameters.AddWithValue("@Gender", details.Gender);
+                    command.Parameters.AddWithValue("@PhoneNumber", details.PhoneNumber);
+                    command.Parameters.AddWithValue("@Address", details.Address);
+                    command.Parameters.AddWithValue("@Department", details.Department);
+                    command.Parameters.AddWithValue("@TaxablePay", details.TaxablePay);
+                    command.Parameters.AddWithValue("@Deductions", details.Deductions);
+                    command.Parameters.AddWithValue("@NetPay", details.NetPay);
+                    command.Parameters.AddWithValue("@IncomeTax", details.IncomeTax);
+                    this.connection.Open(); //Opening the connection
+                    var result = command.ExecuteNonQuery();
+                    if (result != 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.connection.Close();//Closing the connection
+            }
+            return false;
+        }
     }
 }
