@@ -215,8 +215,6 @@ namespace EmployeePayrollService
             }
         }
 
-        
-
         public bool AddEmployee(EmployeeDetails details)
         {
             try
@@ -255,6 +253,34 @@ namespace EmployeePayrollService
             finally
             {
                 this.connection.Close();//Closing the connection
+            }
+            return false;
+        }
+
+        public bool RemoveEmployee(int employeeID)
+        {
+            try
+            {
+                using(this.connection)
+                {
+                    //Using stored procedure
+                    SqlCommand command = new SqlCommand("dbo.RemoveEmployee", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", employeeID);
+                    this.connection.Open(); //Opening the connection
+                    var result = command.ExecuteNonQuery();
+                    if (result != 0)
+                        return true;
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.connection.Close(); //Closing the connection
             }
             return false;
         }
