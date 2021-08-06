@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EmployeePayrollService
 {
@@ -26,6 +27,15 @@ namespace EmployeePayrollService
                 Console.WriteLine("Successfully removed");
             else
                 Console.WriteLine("Not removed");
+
+            ThreadOperations threadOperations = new ThreadOperations();
+            List<EmployeeDetails> employeeList = new List<EmployeeDetails>();
+            //Adding employee details to the list
+            employeeList.Add(details);
+            //Add list of employee details without thread
+            threadOperations.AddEmployeeWithoutThread(employeeList);
+            //Add list of employee details with thread
+            threadOperations.AddEmployeeWithThread(employeeList);
         }
     }
 }
