@@ -6,7 +6,7 @@ namespace EmployeePayrollService
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Employee Payroll Service uing ADO.Net");
+            Console.WriteLine("Employee Payroll Service using ADO.Net");
             EmployeeRepository repository = new EmployeeRepository();
             repository.AggregateFunctions();
         }
