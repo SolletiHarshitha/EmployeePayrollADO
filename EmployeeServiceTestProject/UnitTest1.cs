@@ -28,5 +28,22 @@ namespace EmployeeServiceTestProject
             //Assert
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void TestAddEmployee()
+        {
+            bool expected = true;
+            details.EmployeeName = "Kaveri";
+            details.BasicPay = 394856;
+            details.Gender = "F";
+            details.PhoneNumber = "99494294852";
+            details.Address = "Karnataka";
+            details.Department = "HR";
+            details.TaxablePay = 1000;
+            details.Deductions = 100;
+            details.NetPay = 20000;
+            details.IncomeTax = 200;
+            bool actual = repository.AddEmployee(details);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
