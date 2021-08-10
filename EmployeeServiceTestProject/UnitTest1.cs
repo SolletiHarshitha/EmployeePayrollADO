@@ -31,6 +31,8 @@ namespace EmployeeServiceTestProject
         [TestMethod]
         public void TestAddEmployee()
         {
+            ///AAA Methododlogy
+            //Arrange
             bool expected = true;
             details.EmployeeName = "Kaveri";
             details.BasicPay = 394856;
@@ -42,7 +44,9 @@ namespace EmployeeServiceTestProject
             details.Deductions = 100;
             details.NetPay = 20000;
             details.IncomeTax = 200;
+            //Act
             bool actual = repository.AddEmployee(details);
+            //Assert
             Assert.AreEqual(expected, actual);
         }
     }

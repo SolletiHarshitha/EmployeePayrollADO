@@ -245,9 +245,9 @@ namespace EmployeePayrollService
                         return false;
                 }
             }
-            catch (Exception ex)
+            catch (CustomExceptions)
             {
-                Console.WriteLine(ex.Message);
+                throw new CustomExceptions("Not Added",CustomExceptions.ExceptionType.NOT_ADDED);
             }
             finally
             {
