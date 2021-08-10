@@ -10,12 +10,12 @@ namespace EmployeePayrollService
             EmployeeRepository repository = new EmployeeRepository();
             EmployeeDetails details = new EmployeeDetails();
 
-            details.EmployeeName = "Kaveri";
-            details.BasicPay = 394856;
+            details.EmployeeName = "Lahari";
+            details.BasicPay = 45897;
             details.Gender = "F";
-            details.PhoneNumber = "99494294852";
+            details.PhoneNumber = "89489493902";
             details.Address = "Karnataka";
-            details.Department = "HR";
+            details.Department = "Trainee";
             details.TaxablePay = 1000;
             details.Deductions = 100;
             details.NetPay = 20000;

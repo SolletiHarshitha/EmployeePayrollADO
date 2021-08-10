@@ -226,6 +226,7 @@ namespace EmployeePayrollService
                     command.CommandType = CommandType.StoredProcedure;
 
                     //Adding the parameters
+                    command.Parameters.AddWithValue("@Id", details.EmployeeID);
                     command.Parameters.AddWithValue("@Name", details.EmployeeName);
                     command.Parameters.AddWithValue("@BasicPay", details.BasicPay);
                     command.Parameters.AddWithValue("@StartDate", DateTime.Now);
